@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "altayerpopup-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/altayerpopup/AltayerpopupWebPart.js",
+          "manifest": "./src/webparts/altayerpopup/AltayerpopupWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "AltayerpopupWebPartStrings": "lib/webparts/altayerpopup/loc/{locale}.js"
+  }
+}

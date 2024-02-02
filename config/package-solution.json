@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "altayer-popup-client-side-solution",
+    "id": "a617540a-bfbc-4b48-9d17-d2664da520b5",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.16.1"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "altayer_popup description"
+      },
+      "longDescription": {
+        "default": "altayer_popup description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "altayer-popup Feature",
+        "description": "The feature that activates elements of the altayer-popup solution.",
+        "id": "e3cb5afc-52e5-4073-b278-706d2858fccf",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/altayer-popup.sppkg"
+  }
+}
