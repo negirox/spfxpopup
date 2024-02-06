@@ -9,7 +9,7 @@ import { SPResponse } from '../../../model/SPResponse';
 import { AlertModel } from '../../../model/IAlertModel';
 import { getSP } from '../../../pnpjsConfig';
 import { SPFI } from '@pnp/sp';
-import { escape } from '@microsoft/sp-lodash-subset';
+//import { escape } from '@microsoft/sp-lodash-subset';
 const popupStyles = mergeStyleSets({
   root: {
     background: 'rgba(0, 0, 0, 0.2)',
@@ -38,8 +38,8 @@ export default class Altayerpopup extends React.Component<IAltayerpopupProps, {
   isPopupVisible: boolean,
   records: Array<AlertModel>,
   acceptConsent: boolean,
-  userResponseItemId:number,
-  isAlwaysView:boolean
+  userResponseItemId: number,
+  isAlwaysView: boolean
 }> {
   private _spContext: SPFI;
   private _loggedInUserId: number;
@@ -49,8 +49,8 @@ export default class Altayerpopup extends React.Component<IAltayerpopupProps, {
       isPopupVisible: false,
       records: new Array<AlertModel>(),
       acceptConsent: false,
-      userResponseItemId:0,
-      isAlwaysView:false
+      userResponseItemId: 0,
+      isAlwaysView: false
     }
     this.handleAgreement = this.handleAgreement.bind(this);
     this.AcceptConsent = this.AcceptConsent.bind(this);
@@ -89,14 +89,14 @@ export default class Altayerpopup extends React.Component<IAltayerpopupProps, {
       alertModelRecords.push(model);
       ConsentItemId = x.Id;
     });
-    if(ConsentItemId > 0){
+    if (ConsentItemId > 0) {
       const response = await this.IsResponseRecorded(ConsentItemId);
       if (response.length > 0) {
         if (response[0].Id > 0) {
           isRecorded = response[0].NeverShow;
           this.setState({
             userResponseItemId: response[0].Id,
-            isAlwaysView:response[0].NeverShow
+            isAlwaysView: response[0].NeverShow
           })
         }
       }
@@ -145,20 +145,20 @@ export default class Altayerpopup extends React.Component<IAltayerpopupProps, {
         ResponseTime: this.getFormattedDate(new Date()),
         NeverShow: this.state.isAlwaysView
       }
-      if(this.state.userResponseItemId === 0){
+      if (this.state.userResponseItemId === 0) {
         const result = await this._spContext.web.lists.getByTitle(this.props.responseListName).items.add(postObj);
         if (result.item) {
           console.log(result);
         }
       }
-      else{
+      else {
         const result = await this._spContext.web.lists.getByTitle(this.props.responseListName).items
-        .getById(this.state.userResponseItemId).update(postObj);
+          .getById(this.state.userResponseItemId).update(postObj);
         if (result.item) {
           console.log(result);
         }
       }
-     
+
       this.setState({
         isPopupVisible: false
       })
@@ -198,18 +198,24 @@ export default class Altayerpopup extends React.Component<IAltayerpopupProps, {
 
                   <p className='flex'
                     dangerouslySetInnerHTML={{ __html: this.state.records.length > 0 && this.state.records[0].Description }} />
-                  <label style={{ fontWeight: 700 }}>
-                    <input type="checkbox" onChange={this.AcceptConsent} />
-                    {escape(this.props.consentTerms)}
-                  </label>
-                  <br/>
-                  <label style={{ fontWeight: 700 }}>
-                    <input type="checkbox" onChange={this.AcceptDontShow} />
-                    {escape(this.props.neverShowText)}
-                  </label>
-                  <PrimaryButton onClick={this.handleAgreement}
-                    style={{ float: 'right' }}
-                    disabled={!this.state.acceptConsent}>I Agree</PrimaryButton>
+                  <div className='flex'>
+                    <div>
+                      <label style={{ fontWeight: 700 }}>
+                        <input type="checkbox" onChange={this.AcceptConsent} />
+                        {(this.props.consentTerms)}
+                      </label>
+                    </div>
+                    <div style={{ marginTop: '.4rem' }}>
+                      <label style={{ fontWeight: 700 }}>
+                        <input type="checkbox" onChange={this.AcceptDontShow} />
+                        {(this.props.neverShowText)}
+                      </label>
+                    </div>
+                  </div>
+                  <div style={{ marginTop: '1rem', textAlign:'center' }}>
+                    <PrimaryButton onClick={this.handleAgreement}
+                      disabled={!this.state.acceptConsent}>I Agree</PrimaryButton>
+                  </div>
                 </div>
                 }
               </FocusTrapZone>
